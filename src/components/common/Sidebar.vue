@@ -62,6 +62,11 @@ export default {
                     title: '系统首页'
                 },
                 {
+                    icon: 'el-icon-lx-service',
+                    index: 'markdown',
+                    title: '客服'
+                },
+                {
                     icon: 'el-icon-lx-cascades',
                     index: 'table',
                     title: '基础表格'
@@ -80,20 +85,7 @@ export default {
                             index: 'form',
                             title: '基本表单'
                         },
-                        {
-                            index: '3-2',
-                            title: '三级菜单',
-                            subs: [
-                                {
-                                    index: 'editor',
-                                    title: '富文本编辑器'
-                                },
-                                {
-                                    index: 'markdown',
-                                    title: 'markdown编辑器'
-                                }
-                            ]
-                        },
+
                         {
                             index: 'upload',
                             title: '文件上传'
@@ -105,11 +97,7 @@ export default {
                     index: 'icon',
                     title: '自定义图标'
                 },
-                {
-                    icon: 'el-icon-pie-chart',
-                    index: 'charts',
-                    title: 'schart图表'
-                },
+
                 {
                     icon: 'el-icon-rank',
                     index: '6',
@@ -125,11 +113,7 @@ export default {
                         }
                     ]
                 },
-                {
-                    icon: 'el-icon-lx-global',
-                    index: 'i18n',
-                    title: '国际化功能'
-                },
+
                 {
                     icon: 'el-icon-lx-warn',
                     index: '7',
@@ -144,11 +128,6 @@ export default {
                             title: '404页面'
                         }
                     ]
-                },
-                {
-                    icon: 'el-icon-lx-redpacket_fill',
-                    index: '/donate',
-                    title: '支持作者'
                 }
             ]
         };
