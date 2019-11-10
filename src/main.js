@@ -2,21 +2,27 @@ import Vue from 'vue';
 import App from './App';
 import router from './router';
 import ElementUI from 'element-ui';
+import axios from 'axios'
 
+import vueRsource from 'vue-resource'
+import Vuex from 'vuex'
 import 'element-ui/lib/theme-chalk/index.css'; // 默认主题
 // import './assets/css/theme-green/index.css'; // 浅绿色主题
 import './assets/css/icon.css';
 import './components/common/directives';
 import 'babel-polyfill';
-
+//Vue.prototype.$http = axios
 Vue.config.productionTip = false;
 
 Vue.use(ElementUI, {
     size: 'small'
 });
+Vue.use(Vuex);
 
 
-//使用钩子函数对路由进行权限跳转 to（去向）我们要访问的路由  from（来源）路由从哪里跳转到哪里  next 下一步的选择
+Vue.use(vueRsource, axios);
+
+/* //使用钩子函数对路由进行权限跳转 to（去向）我们要访问的路由  from（来源）路由从哪里跳转到哪里  next 下一步的选择
 router.beforeEach((to, from, next) => {
     document.title = `${to.meta.title} | vue-manage-system`;
     const role = localStorage.getItem('ms_username');
@@ -35,10 +41,11 @@ router.beforeEach((to, from, next) => {
             next();
         }
     }
-});
+}); */
 
 
 new Vue({
     router,
+
     render: h => h(App)
 }).$mount('#app');

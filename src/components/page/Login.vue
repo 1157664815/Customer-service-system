@@ -18,10 +18,10 @@
                         <el-button slot="prepend" icon="el-icon-lx-lock"></el-button>
                     </el-input>
                 </el-form-item>
+
                 <div class="login-btn">
                     <el-button type="primary" @click="submitForm()">登录</el-button>
                 </div>
-                <p class="login-tips">Tips : 用户名和密码随便填。</p>
             </el-form>
         </div>
     </div>
@@ -33,29 +33,38 @@ export default {
         return {
             param: {
                 username: 'admin',
-                password: '123123',
+                password: '123456'
             },
             rules: {
                 username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-                password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
-            },
+                password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
+            }
         };
     },
     methods: {
         submitForm() {
-            this.$refs.login.validate(valid => {
-                if (valid) {
+            //console.log(this.param.username);
+            //var api = '/api/user.php?p=admin';
+            this.$http.get('/api/user.php?p=' + this.param.username).then(response => {
+                var username = response.body.username;
+                var password = response.body.userpasswd;
+                //console.log(this.param.username);
+                if (username == this.param.username && password == this.param.password) {
                     this.$message.success('登录成功');
-                    localStorage.setItem('ms_username', this.param.username);
+                    sessionStorage.setItem('ms_username', this.param.username);
+                    sessionStorage.setItem('jurisdiction', response.body.power);
+                    // console.log(response.body.power);
                     this.$router.push('/');
+                } else if ('' == this.param.username || '' == this.param.password) {
+                    this.$message.error('账号和密码不能为空');
                 } else {
-                    this.$message.error('请输入账号和密码');
-                    console.log('error submit!!');
+                    this.$message.error('请输入正确的账号和密码');
+                    // console.log('error submit!!');
                     return false;
                 }
             });
-        },
-    },
+        }
+    }
 };
 </script>
 

@@ -3,10 +3,13 @@ import Router from 'vue-router';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
     routes: [{
             path: '/',
-            redirect: '/dashboard'
+            redirect: '/dashboard',
+            meta: {
+                requireAuth: true,
+            }
         },
         {
             path: '/',
@@ -107,3 +110,27 @@ export default new Router({
         }
     ]
 });
+//路由守卫   to（去向）我们要访问的路由  from（来源）路由从哪里跳转到哪里  next 下一步的选择
+router.beforeEach((to, from, next) => {
+    if (to.meta.auth) {
+        //需要认证，则检查令牌
+        if (store.state.token) {
+            //已经登录
+
+            next({
+                path: '/login',
+            });
+        } else {
+            next({ //跳去登陆
+                path: '/login',
+                query: { redirect: to.path }
+            })
+        }
+    } else {
+        next();
+    }
+})
+
+
+
+export default router;
