@@ -50,7 +50,8 @@ router.beforeEach((to, from, next) => {
         let quan = sessionStorage.getItem('jurisdiction');
         if (to.meta.xian >= quan) {
             next();
-            // console.log('进入页面');
+            // console.log(to.meta);
+            // console.log(from.meta);
         } else {
             next('/403');
             // console.log('wu入页面');

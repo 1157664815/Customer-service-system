@@ -3,9 +3,8 @@
         <div class="crumbs">
             <el-breadcrumb separator="/">
                 <el-breadcrumb-item>
-                    <i class="el-icon-lx-calendar"></i> 表单
+                    <i class="el-icon-s-custom"></i> 用户管理
                 </el-breadcrumb-item>
-                <el-breadcrumb-item>管理设置</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div class="container">
@@ -26,13 +25,23 @@
                 <el-form-item label="确认密码" prop="checkPass" style="width:50%">
                     <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="角色">
+                <el-form-item label="所属机构">
                     <el-select v-model="value" placeholder="请选择">
                         <el-option
-                            v-for="item in options"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value"
+                            v-for="item in zz"
+                            :key="item.id"
+                            :label="item.title"
+                            :value="item.title"
+                        ></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="角色">
+                    <el-select v-model="mechanism" placeholder="请选择">
+                        <el-option
+                            v-for="item in role"
+                            :key="item.id"
+                            :label="item.title"
+                            :value="item.title"
                         ></el-option>
                     </el-select>
                 </el-form-item>
@@ -46,6 +55,7 @@
 </template>
 
 <script>
+import { log } from 'util';
 export default {
     name: 'baseform',
     data() {
@@ -86,31 +96,37 @@ export default {
             }
         };
         return {
+            //值
             ruleForm: {
                 pass: '',
                 checkPass: '',
                 age: '',
                 role: ''
             },
+            //表单验证规则
             rules: {
                 pass: [{ validator: validatePass, trigger: 'blur' }],
                 checkPass: [{ validator: validatePass2, trigger: 'blur' }],
                 age: [{ validator: checkAge, trigger: 'blur' }]
             },
-            options: [
-                {
-                    value: '选项1',
-                    label: '管理员'
-                },
-                {
-                    value: '选项2',
-                    label: '客服'
-                }
-            ],
-            value: ''
+            //所属机构
+            zz: [],
+            value: '',
+            //角色
+            role: [],
+            mechanism: ''
         };
     },
+    created() {
+        this.$http.get('/api/user.php?p=zz').then(data => {
+            // console.log(data);
+            this.zz = data.data.zz; //获取到的机构列表
+            this.role = data.data.role; //获取到的角色列表
+            //console.log(data.data.zz);
+        });
+    },
     methods: {
+        //提交
         submitForm(formName) {
             this.$refs[formName].validate(valid => {
                 if (valid) {
@@ -120,7 +136,7 @@ export default {
                     return false;
                 }
             });
-        },
+        }, //重置
         resetForm(formName) {
             this.$refs[formName].resetFields();
         }

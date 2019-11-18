@@ -1,87 +1,102 @@
 <template>
-    <div id="wangeditor">
-        <!-- 会话列表 -->
-        <div class="SessionList">
-            <header class="list-head-left">
-                <div class="list-chart">
-                    <img src="http://pic.51yuansu.com/pic3/cover/02/79/99/5a4b45c6d70f4_610.jpg" />
-                </div>
-                <div class="Choice">
-                    <span>客服小童</span>
-                    <div>
-                        <select class="state">
-                            <option>在线</option>
-                            <option>离线</option>
-                        </select>
+    <div>
+        <div class="crumbs">
+            <el-breadcrumb separator="/">
+                <el-breadcrumb-item>
+                    <i class="el-icon-lx-service"></i> 客服
+                </el-breadcrumb-item>
+            </el-breadcrumb>
+        </div>
+        <div id="wangeditor">
+            <!-- 会话列表 -->
+            <div class="SessionList">
+                <header class="list-head-left">
+                    <div class="list-chart">
+                        <img
+                            src="http://pic.51yuansu.com/pic3/cover/02/79/99/5a4b45c6d70f4_610.jpg"
+                        />
                     </div>
-                </div>
-            </header>
-            <div>
-                <el-tabs v-model="message">
-                    <el-tab-pane
-                        v-bind:class="{ active: isActive }"
-                        :label="`会话(${unread.length})`"
-                        name="first"
-                    >
-                        <el-table :data="unread" :show-header="false">
-                            <el-table-column>
-                                <template slot-scope="scope">
-                                    <span class="message-title">{{scope.row.title}}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column prop="date"></el-table-column>
-                            <el-table-column width="80">
-                                <template slot-scope="scope">
-                                    <el-button size="small" @click="handleRead(scope.$index)">X</el-button>
-                                </template>
-                            </el-table-column>
-                        </el-table>
-                    </el-tab-pane>
-                    <el-tab-pane v-bind:class="{ active: isActive }" :label="`历史`" name="second">
-                        <template v-if="message === 'second'">
-                            <el-table :data="read" :show-header="false">
+                    <div class="Choice">
+                        <span>客服小童</span>
+                        <div>
+                            <select class="state">
+                                <option>在线</option>
+                                <option>离线</option>
+                            </select>
+                        </div>
+                    </div>
+                </header>
+                <div>
+                    <el-tabs v-model="message">
+                        <el-tab-pane
+                            v-bind:class="{ active: isActive }"
+                            :label="`会话(${unread.length})`"
+                            name="first"
+                        >
+                            <el-table :data="unread" :show-header="false">
                                 <el-table-column>
                                     <template slot-scope="scope">
                                         <span class="message-title">{{scope.row.title}}</span>
                                     </template>
                                 </el-table-column>
                                 <el-table-column prop="date"></el-table-column>
-                                <el-table-column width="80"></el-table-column>
+                                <el-table-column width="80">
+                                    <template slot-scope="scope">
+                                        <el-button size="small" @click="handleRead(scope.$index)">X</el-button>
+                                    </template>
+                                </el-table-column>
                             </el-table>
-                        </template>
-                    </el-tab-pane>
-                </el-tabs>
+                        </el-tab-pane>
+                        <el-tab-pane
+                            v-bind:class="{ active: isActive }"
+                            :label="`历史`"
+                            name="second"
+                        >
+                            <template v-if="message === 'second'">
+                                <el-table :data="read" :show-header="false">
+                                    <el-table-column>
+                                        <template slot-scope="scope">
+                                            <span class="message-title">{{scope.row.title}}</span>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column prop="date"></el-table-column>
+                                    <el-table-column width="80"></el-table-column>
+                                </el-table>
+                            </template>
+                        </el-tab-pane>
+                    </el-tabs>
+                </div>
             </div>
-        </div>
-        <!-- 聊天界面 -->
-        <div class="Interface">
-            <div>
-                <header class="list-head-right">
-                    <div class="list-chart">
-                        <img
-                            src="http://pic.51yuansu.com/pic3/cover/02/79/99/5a4b45c6d70f4_610.jpg"
-                        />
-                    </div>
-                    <div class="Tourist">
-                        <i class="el-icon-lx-mobilefill"></i>
-                        <span>游客</span>
-                        <p>在线</p>
-                    </div>
-                    <div class="Transfer-Close">
-                        <div>
-                            <img src="../../assets/img/liebiao-zhuanjie.png" alt />
-                            <p>客服转接</p>
+            <!-- 聊天界面 -->
+            <div class="Interface">
+                <div>
+                    <header class="list-head-right">
+                        <div class="list-chart">
+                            <img
+                                src="http://pic.51yuansu.com/pic3/cover/02/79/99/5a4b45c6d70f4_610.jpg"
+                            />
                         </div>
-                        <div>
-                            <img src="../../assets/img/huabanfuben.png" alt />
-                            <p>关闭会话</p>
+                        <div class="Tourist">
+                            <i class="el-icon-lx-mobilefill"></i>
+                            <span>游客</span>
+                            <p>在线</p>
                         </div>
-                    </div>
-                </header>
+                        <div class="Transfer-Close">
+                            <div>
+                                <img src="../../assets/img/liebiao-zhuanjie.png" alt />
+                                <p>客服转接</p>
+                            </div>
+                            <div>
+                                <img src="../../assets/img/huabanfuben.png" alt />
+                                <p>关闭会话</p>
+                            </div>
+                        </div>
+                    </header>
+                </div>
+                <div></div>
+                <button class="Send-out" type="buttom">发送</button>
+                <div class="edit" ref="editorElem" style="text-align:left;"></div>
             </div>
-            <div></div>
-            <button class="Send-out" type="buttom">发送</button>
-            <div class="edit" ref="editorElem" style="text-align:left;"></div>
         </div>
     </div>
 </template>
