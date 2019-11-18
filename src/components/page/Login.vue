@@ -43,17 +43,21 @@ export default {
     },
     methods: {
         submitForm() {
-            //console.log(this.param.username);
-            //var api = '/api/user.php?p=admin';
             this.$http.get('/api/user.php?p=' + this.param.username).then(response => {
-                var username = response.body.username;
-                var password = response.body.userpasswd;
+                var username = response.body.username; //get到的账号
+                var password = response.body.userpasswd; //get到的密码
                 //console.log(this.param.username);
-                if (username == this.param.username && password == this.param.password) {
+                // console.log(this.$md5(this.param.password));
+                if (username == this.param.username && password == this.$md5(this.param.password)) {
                     this.$message.success('登录成功');
-                    sessionStorage.setItem('ms_username', this.param.username);
-                    sessionStorage.setItem('jurisdiction', response.body.power);
-                    // console.log(response.body.power);
+                    sessionStorage.setItem('ms_username', this.param.username); //存入账号名  关闭销毁
+                    sessionStorage.setItem('jurisdiction', response.body.power); //存入权限   关闭销毁
+                    // var userInfo = { user: this.param.username, pass: this.param.password };
+                    // this.$store.commit('$_setToken', this.param.username);
+                    // console.log(this.$store.commit('$_setToken'));
+                    // console.log(userInfo);
+                    this.$cookies.set('tokenpa', this.$md5(password), 1800); //存入cookie MD5加密
+                    // console.log(this.$cookies.get('tokenpa'));
                     this.$router.push('/');
                 } else if ('' == this.param.username || '' == this.param.password) {
                     this.$message.error('账号和密码不能为空');
@@ -110,4 +114,4 @@ export default {
     line-height: 30px;
     color: #fff;
 }
-</style>
+</style>+

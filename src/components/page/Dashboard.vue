@@ -6,7 +6,7 @@
                     <div class="user-info">
                         <img src="../../assets/img/img.jpg" class="user-avator" alt />
                         <div class="user-info-cont">
-                            <div class="user-info-name">{{quanxian}}</div>
+                            <div class="user-info-name">{{Username}}</div>
                             <div>{{role}}</div>
                         </div>
                     </div>
@@ -106,7 +106,7 @@
 export default {
     data() {
         return {
-            quanxian: sessionStorage.getItem('ms_username'),
+            Username: sessionStorage.getItem('ms_username'),
             name: sessionStorage.getItem('jurisdiction'),
             todoList: [
                 {

@@ -61,7 +61,7 @@ export default {
     },
     computed: {
         username() {
-            let username = localStorage.getItem('ms_username');
+            let username = sessionStorage.getItem('ms_username');
             return username ? username : this.name;
         }
     },
@@ -69,7 +69,9 @@ export default {
         // 用户名下拉菜单选择事件
         handleCommand(command) {
             if (command == 'loginout') {
-                localStorage.removeItem('ms_username');
+                // this.$cookies.set('tokenpa', this.$md5(password), 1800);
+                this.$cookies.remove('tokenpa');
+                sessionStorage.clear();
                 this.$router.push('/login');
             }
         },

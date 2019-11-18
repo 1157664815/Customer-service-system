@@ -54,8 +54,9 @@ import bus from '../common/bus';
 export default {
     data() {
         return {
+            items: [],
             collapse: false,
-            items: [
+            admin: [
                 {
                     icon: 'el-icon-lx-home',
                     index: 'dashboard',
@@ -65,6 +66,11 @@ export default {
                     icon: 'el-icon-lx-service',
                     index: 'markdown',
                     title: '客服'
+                },
+                {
+                    icon: 'el-icon-s-custom',
+                    index: 'AddManagement',
+                    title: '用户管理'
                 },
                 {
                     icon: 'el-icon-lx-cascades',
@@ -129,6 +135,76 @@ export default {
                         }
                     ]
                 }
+            ],
+            user: [
+                {
+                    icon: 'el-icon-lx-home',
+                    index: 'dashboard',
+                    title: '系统首页'
+                },
+                {
+                    icon: 'el-icon-lx-service',
+                    index: 'markdown',
+                    title: '客服'
+                },
+                {
+                    icon: 'el-icon-s-custom',
+                    index: 'AddManagement',
+                    title: '用户管理'
+                },
+                {
+                    icon: 'el-icon-lx-cascades',
+                    index: 'table',
+                    title: '基础表格'
+                },
+                {
+                    icon: 'el-icon-lx-copy',
+                    index: 'tabs',
+                    title: 'tab选项卡'
+                },
+
+                {
+                    icon: 'el-icon-lx-warn',
+                    index: '7',
+                    title: '错误处理',
+                    subs: [
+                        {
+                            index: 'permission',
+                            title: '权限测试'
+                        },
+                        {
+                            index: '404',
+                            title: '404页面'
+                        }
+                    ]
+                }
+            ],
+            service: [
+                {
+                    icon: 'el-icon-lx-home',
+                    index: 'dashboard',
+                    title: '系统首页'
+                },
+                {
+                    icon: 'el-icon-lx-service',
+                    index: 'markdown',
+                    title: '客服'
+                },
+                {
+                    icon: 'el-icon-lx-warn',
+                    index: '7',
+                    title: '错误处理',
+                    subs: [
+                        {
+                            index: 'permission',
+                            title: '权限测试'
+                        },
+                        {
+                            index: '404',
+                            title: '404页面'
+                        }
+                    ]
+                }
             ]
         };
     },
@@ -137,12 +213,22 @@ export default {
             return this.$route.path.replace('/', '');
         }
     },
+
     created() {
         // 通过 Event Bus 进行组件间通信，来折叠侧边栏
         bus.$on('collapse', msg => {
             this.collapse = msg;
             bus.$emit('collapse-content', msg);
         });
+
+        let items = sessionStorage.getItem('jurisdiction');
+        if (items === '0') {
+            this.items = this.admin;
+        } else if (items === '1') {
+            this.items = this.user;
+        } else {
+            this.items = this.service;
+        }
     }
 };
 </script>
