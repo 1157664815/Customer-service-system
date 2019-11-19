@@ -3,7 +3,7 @@
         <div class="crumbs">
             <el-breadcrumb separator="/">
                 <el-breadcrumb-item>
-                    <i class="el-icon-s-custom"></i> 用户管理
+                    <i class="el-icon-s-custom"></i> 管理设置
                 </el-breadcrumb-item>
             </el-breadcrumb>
         </div>

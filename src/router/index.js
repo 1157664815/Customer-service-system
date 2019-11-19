@@ -68,7 +68,7 @@ const router = new Router({
                     path: '/AddManagement',
                     component: () =>
                         import ( /* webpackChunkName: "markdown" */ '../components/page/ManagementSettings.vue'),
-                    meta: { title: '用户管理', xian: '1' }
+                    meta: { title: '管理设置', xian: '1' }
                 },
                 {
                     // 图片上传组件

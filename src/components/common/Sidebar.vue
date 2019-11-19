@@ -70,7 +70,7 @@ export default {
                 {
                     icon: 'el-icon-s-custom',
                     index: 'AddManagement',
-                    title: '用户管理'
+                    title: '管理设置'
                 },
                 {
                     icon: 'el-icon-lx-cascades',
@@ -150,7 +150,7 @@ export default {
                 {
                     icon: 'el-icon-s-custom',
                     index: 'AddManagement',
-                    title: '用户管理'
+                    title: '管理设置'
                 },
                 {
                     icon: 'el-icon-lx-cascades',
