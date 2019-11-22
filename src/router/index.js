@@ -71,6 +71,13 @@ const router = new Router({
                     meta: { title: '管理设置', xian: '1' }
                 },
                 {
+                    // 个人设置组件
+                    path: '/PersonalSettings',
+                    component: () =>
+                        import ( /* webpackChunkName: "markdown" */ '../components/page/PersonalSettings.vue'),
+                    meta: { title: '个人设置', xian: '2' }
+                },
+                {
                     // 图片上传组件
                     path: '/upload',
                     component: () =>

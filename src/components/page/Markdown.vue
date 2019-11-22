@@ -27,7 +27,7 @@
                     </div>
                 </header>
                 <div>
-                    <el-tabs v-model="message">
+                    <el-tabs v-model="message" stretch>
                         <el-tab-pane
                             v-bind:class="{ active: isActive }"
                             :label="`会话(${unread.length})`"
@@ -107,10 +107,11 @@ export default {
     data() {
         return {
             editor: null,
-            editorContent: '',
-            message: 'first',
+            editorContent: '', //富文本值
+            message: 'first', //绑定值
             showHeader: false,
             unread: [
+                //会话
                 {
                     date: ' 20:00:00',
                     title: '张三'
@@ -121,15 +122,10 @@ export default {
                 }
             ],
             read: [
+                //历史记录
                 {
                     date: ' 20:00:00',
                     title: '王五'
-                }
-            ],
-            recycle: [
-                {
-                    date: ' 20:00:00',
-                    title: '赵倩'
                 }
             ],
             isActive: true
@@ -151,6 +147,22 @@ export default {
             'image' // 插入图片
         ];
         this.editor.create(); // 创建富文本实例
+    },
+    methods: {
+        //移入历史记录
+        handleRead(index) {
+            const item = this.unread.splice(index, 1);
+            console.log(item);
+            this.read = item.concat(this.read);
+        },
+        handleDel(index) {
+            const item = this.read.splice(index, 1);
+            this.recycle = item.concat(this.recycle);
+        },
+        handleRestore(index) {
+            const item = this.recycle.splice(index, 1);
+            this.read = item.concat(this.read);
+        }
     }
 };
 </script>

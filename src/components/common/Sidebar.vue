@@ -134,6 +134,11 @@ export default {
                             title: '404页面'
                         }
                     ]
+                },
+                {
+                    icon: 'el-icon-setting',
+                    index: 'PersonalSettings',
+                    title: '个人设置'
                 }
             ],
             user: [
@@ -177,6 +182,11 @@ export default {
                             title: '404页面'
                         }
                     ]
+                },
+                {
+                    icon: 'el-icon-setting',
+                    index: 'PersonalSettings',
+                    title: '个人设置'
                 }
             ],
             service: [
@@ -204,6 +214,11 @@ export default {
                             title: '404页面'
                         }
                     ]
+                },
+                {
+                    icon: 'el-icon-setting',
+                    index: 'PersonalSettings',
+                    title: '个人设置'
                 }
             ]
         };

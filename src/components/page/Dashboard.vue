@@ -65,38 +65,6 @@
                         </el-card>
                     </el-col>
                 </el-row>
-                <!-- <el-card shadow="hover" style="height:403px;">
-                    <div slot="header" class="clearfix">
-                        <span>待办事项</span>
-                        <el-button style="float: right; padding: 3px 0" type="text">添加</el-button>
-                    </div>
-                    <el-table
-                        :data="todoList"
-                        :show-header="false"
-                        height="304"
-                        style="width: 100%;font-size:14px;"
-                    >
-                        <el-table-column width="40">
-                            <template slot-scope="scope">
-                                <el-checkbox v-model="scope.row.status"></el-checkbox>
-                            </template>
-                        </el-table-column>
-                        <el-table-column>
-                            <template slot-scope="scope">
-                                <div
-                                    class="todo-item"
-                                    :class="{'todo-item-del': scope.row.status}"
-                                >{{scope.row.title}}</div>
-                            </template>
-                        </el-table-column>
-                        <el-table-column width="60">
-                            <template>
-                                <i class="el-icon-edit"></i>
-                                <i class="el-icon-delete"></i>
-                            </template>
-                        </el-table-column>
-                    </el-table>
-                </el-card>-->
             </el-col>
         </el-row>
     </div>
@@ -106,34 +74,8 @@
 export default {
     data() {
         return {
-            Username: sessionStorage.getItem('ms_username'),
-            name: sessionStorage.getItem('jurisdiction'),
-            todoList: [
-                {
-                    title: '今天要修复100个bug',
-                    status: false
-                },
-                {
-                    title: '今天要修复100个bug',
-                    status: false
-                },
-                {
-                    title: '今天要写100行代码加几个bug吧',
-                    status: false
-                },
-                {
-                    title: '今天要修复100个bug',
-                    status: false
-                },
-                {
-                    title: '今天要修复100个bug',
-                    status: true
-                },
-                {
-                    title: '今天要写100行代码加几个bug吧',
-                    status: true
-                }
-            ]
+            Username: sessionStorage.getItem('ms_username'), //账号
+            name: sessionStorage.getItem('jurisdiction') //权限
         };
     },
 
